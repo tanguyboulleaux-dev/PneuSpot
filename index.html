@@ -49,7 +49,7 @@
         .safe-pb {
             padding-bottom: calc(var(--sab) + 1rem);
         }
-        /* Toggle switch style */
+        /* Style du bouton bascule Particulier/Pro */
         .type-toggle-btn.active {
             background-color: #10b981;
             color: white;
@@ -58,14 +58,14 @@
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
-    <!-- Wrapper Principal -->
+    <!-- Conteneur Mobile -->
     <div class="flex flex-col h-[100dvh] w-full max-w-md mx-auto bg-white shadow-2xl relative overflow-hidden">
         
-        <!-- Header -->
+        <!-- En-tête -->
         <header class="p-4 flex justify-between items-center border-b bg-white z-30 shrink-0 pt-[calc(env(safe-area-inset-top)+1rem)]">
             <div class="flex items-center space-x-2">
                 <div class="bg-emerald-600 p-1.5 rounded-lg">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z"/></svg>
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 12,7Z"/></svg>
                 </div>
                 <h1 class="font-black text-xl tracking-tighter text-emerald-800">PneuSpot</h1>
             </div>
@@ -76,10 +76,10 @@
                 </div>
             </div>
         </header>
-        <!-- Contenu Central -->
+        <!-- Contenu dynamique -->
         <div id="main-content" class="flex-1 relative overflow-hidden">
             
-            <!-- Vue 1 : Carte -->
+            <!-- Vue 1 : Carte Interactive -->
             <div id="view-map" class="h-full w-full">
                 <div id="map"></div>
                 
@@ -92,60 +92,64 @@
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                 </button>
             </div>
-            <!-- Vue 2 : Formulaire de Saisie -->
+            <!-- Vue 2 : Formulaire de Saisie (Particulier/Pro) -->
             <div id="view-scan" class="hidden absolute inset-0 bg-white p-6 space-y-6 overflow-y-auto pb-32">
                 <div class="space-y-1">
-                    <h2 class="font-black text-2xl text-slate-800">Enregistrement</h2>
-                    <p class="text-xs text-slate-500 font-medium">Saisie des données de traçabilité</p>
+                    <h2 class="font-black text-2xl text-slate-800">Traçabilité Dépôt</h2>
+                    <p class="text-xs text-slate-500 font-medium italic">Enregistrement des flux entrants</p>
                 </div>
-                <!-- Sélecteur Particulier / Professionnel -->
+                <!-- Boutons de sélection du profil -->
                 <div class="bg-slate-100 p-1 rounded-2xl flex">
                     <button onclick="toggleUserType('particulier')" id="type-part" class="type-toggle-btn active flex-1 py-3 text-xs font-bold rounded-xl transition-all">Particulier</button>
                     <button onclick="toggleUserType('professionnel')" id="type-prof" class="type-toggle-btn flex-1 py-3 text-xs font-bold rounded-xl transition-all">Professionnel</button>
                 </div>
                 <div class="space-y-4">
+                    <!-- Champ ID Centre -->
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Numéro de série du centre</label>
-                        <input type="text" placeholder="Ex: HUB-ML-42-X" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-slate-800 focus:border-emerald-500 outline-none transition-all">
+                        <input type="text" placeholder="Ex: CENTRE-ML-01" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-slate-800 focus:border-emerald-500 outline-none transition-all">
                     </div>
+                    <!-- Champ Quantité -->
                     <div class="space-y-2">
-                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Nombre de pneus</label>
-                        <input type="number" placeholder="Quantité exacte" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-slate-800 focus:border-emerald-500 outline-none transition-all">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Quantité (Unités ou Estimation)</label>
+                        <input type="number" placeholder="Entrez le nombre" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-slate-800 focus:border-emerald-500 outline-none transition-all">
                     </div>
-                    <!-- Bloc Marques (Affiché uniquement pour Particulier) -->
-                    <div id="brand-selection-block" class="space-y-2">
-                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Marque du pneu</label>
-                        <select class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-slate-800 focus:border-emerald-500 outline-none transition-all appearance-none">
-                            <option value="">Sélectionner une marque</option>
-                            <option value="michelin">Michelin</option>
-                            <option value="bridgestone">Bridgestone</option>
-                            <option value="continental">Continental</option>
-                            <option value="goodyear">Goodyear</option>
-                            <option value="pirelli">Pirelli</option>
-                            <option value="dunlop">Dunlop</option>
-                            <option value="hankook">Hankook</option>
-                            <option value="yokohama">Yokohama</option>
-                            <option value="autre">Autre marque</option>
+                    <!-- Champ dynamique : Type de déchet (Particulier) ou Référence (Masqué pour Pro) -->
+                    <div id="waste-selection-block" class="space-y-2">
+                        <label id="waste-label" class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Type de déchet</label>
+                        <select id="waste-select" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-slate-800 focus:border-emerald-500 outline-none transition-all appearance-none">
+                            <!-- Options par défaut pour Particulier (Déchetterie) -->
+                            <option value="">Sélectionner une catégorie</option>
+                            <option value="pneus">Pneus usagés</option>
+                            <option value="gravats">Gravats / Inerties</option>
+                            <option value="bois">Bois (Palettes, ameublement)</option>
+                            <option value="metaux">Ferrailles et métaux</option>
+                            <option value="verts">Déchets verts</option>
+                            <option value="encombrants">Encombrants</option>
+                            <option value="cartons">Cartons / Papiers</option>
+                            <option value="deee">DEEE (Électroménager, Électronique)</option>
+                            <option value="dangereux">DMS (Peinture, Huiles, Solvants)</option>
+                            <option value="autre">Autre déchet</option>
                         </select>
                     </div>
                     <div class="bg-slate-100 border-2 border-dashed border-slate-200 p-8 rounded-2xl flex flex-col items-center justify-center space-y-2 text-slate-400">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        <span class="text-[10px] font-bold uppercase">Preuve photo obligatoire</span>
+                        <span class="text-[10px] font-bold uppercase tracking-tighter">Photo du gisement (Preuve)</span>
                     </div>
                 </div>
                 <button onclick="submitForm()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black shadow-lg shadow-emerald-200 active:scale-95 transition-transform text-lg uppercase">
-                    Valider le dépôt
+                    Enregistrer le dépôt
                 </button>
             </div>
-            <!-- Vue 3 : Profil -->
+            <!-- Vue 3 : Profil Utilisateur -->
             <div id="view-profile" class="hidden absolute inset-0 bg-white p-6 space-y-8 overflow-y-auto pb-32">
                 <div class="text-center space-y-4">
                     <div class="relative w-20 h-20 mx-auto">
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full rounded-full border-4 border-emerald-500 shadow-md" alt="Avatar">
                     </div>
                     <div>
-                        <h2 class="font-black text-2xl text-slate-800 tracking-tight">Espace Personnel</h2>
-                        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Compte Utilisateur PneuSpot</p>
+                        <h2 class="font-black text-2xl text-slate-800 tracking-tight">Compte</h2>
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Utilisateur Terrain</p>
                     </div>
                 </div>
                 <div class="space-y-4">
@@ -162,16 +166,17 @@
                     SE CONNECTER
                 </button>
             </div>
-            <!-- Confirmation Succès -->
+            <!-- Confirmation de Succès -->
             <div id="view-success" class="hidden absolute inset-0 bg-white flex flex-col items-center justify-center p-10 text-center space-y-6">
                 <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                 </div>
-                <h3 class="text-2xl font-black text-slate-800">Données transmises !</h3>
-                <button onclick="switchView('map')" class="bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold w-full">Retour à la carte</button>
+                <h3 class="text-2xl font-black text-slate-800">Dépôt Validé !</h3>
+                <p class="text-xs text-slate-500">Les données ont été envoyées à la base de données centrale.</p>
+                <button onclick="switchView('map')" class="bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold w-full">Fermer</button>
             </div>
         </div>
-        <!-- Navigation Inférieure FIXE -->
+        <!-- Menu de Navigation Inférieur -->
         <footer class="bg-white border-t flex justify-around items-center px-8 z-50 shrink-0 safe-pb shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
             <button onclick="switchView('map')" id="nav-map" class="bottom-nav-item active flex flex-col items-center space-y-1 py-3 flex-1">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
@@ -192,7 +197,6 @@
     </div>
     <script>
         const apiKey = ""; 
-        // Initialisation Carte (Mobile View)
         const map = L.map('map', { zoomControl: false }).setView([46.3408, 2.6033], 11);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
         const hubIcon = L.divIcon({
@@ -215,7 +219,7 @@
             { name: "Hub Prémilhat", coords: [46.305, 2.535], pts: [[46.315, 2.525], [46.295, 2.545], [46.300, 2.530]] }
         ];
         network.forEach(h => {
-            L.marker(h.coords, { icon: hubIcon }).addTo(map).bindPopup(`<b>${h.name}</b>`);
+            L.marker(h.coords, { icon: hubIcon }).addTo(map);
             h.pts.forEach(p => {
                 L.marker(p, { icon: tireIcon }).addTo(map);
                 L.polyline([h.coords, p], { color: '#818cf8', weight: 1, dashArray: '4, 6', opacity: 0.4 }).addTo(map);
@@ -238,19 +242,21 @@
             }
             if (view === 'map') setTimeout(() => map.invalidateSize(), 100);
         }
-        // --- GESTION TYPE UTILISATEUR ---
+        // --- GESTION DU FORMULAIRE DYNAMIQUE ---
         function toggleUserType(type) {
             const btnPart = document.getElementById('type-part');
             const btnProf = document.getElementById('type-prof');
-            const brandBlock = document.getElementById('brand-selection-block');
+            const wasteBlock = document.getElementById('waste-selection-block');
             if (type === 'particulier') {
                 btnPart.classList.add('active');
                 btnProf.classList.remove('active');
-                brandBlock.classList.remove('hidden');
+                // Affiche le sélecteur multi-déchets pour particulier
+                wasteBlock.classList.remove('hidden');
             } else {
                 btnProf.classList.add('active');
                 btnPart.classList.remove('active');
-                brandBlock.classList.add('hidden');
+                // Masque le bloc pour les professionnels (volume global de pneus)
+                wasteBlock.classList.add('hidden');
             }
         }
         function submitForm() { switchView('success'); }
